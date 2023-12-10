@@ -26,8 +26,8 @@ server <- function(input, output, session) {
   n  <- reactive(input$n)                          # sample size
   number <- reactive(input$number)                 # number of samples
   specific <- reactive(input$specific)             # specific sample
-  min_uni_priori <- reactive(input$min_uni_priori) # minimum für gleichverteilte priori
-  max_uni_priori <- reactive(input$max_uni_priori) # max für gleichverteilte priori
+  min_uni_priori <- reactive(input$uni_prior_range[1]) # minimum für gleichverteilte priori
+  max_uni_priori <- reactive(input$uni_prior_range[2]) # max für gleichverteilte priori
   mu_prior <-  reactive(input$mu_prior)            # mittelwert der priori
   tau_prior <- reactive(input$tau_prior)           # sd der priori
   lengthout <- 100                                # die Länge von mu_hat, NICHT REAKTIV!

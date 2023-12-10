@@ -8,6 +8,17 @@ server <- function(input, output, session) {
 
   set.seed(12345)
 
+  ## UI: update "specific" slider, corresponding to input$number
+
+  observe(label = "update_specific_slider", {
+    updateSliderInput(inputId = "specific",
+                      max = input$number,
+                      value = ifelse(test = input$number < input$specific,
+                                     yes = input$number,
+                                     no = input$specific))
+                      # avoid having a value higher than the new max
+  })
+
   #### data ####
   # get input from ui
   mu <- reactive(input$mu)                         # Population mean

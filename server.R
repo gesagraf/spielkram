@@ -8,10 +8,21 @@ server <- function(input, output, session) {
 
   set.seed(12345)
 
+
+
   #slider updaten
+  #länge des sliders an number anpassen
   observeEvent(input$number, {
     updateSliderInput(inputId = "specific", max = input$number)
   })
+  #range der priori auf mu hat begrenzen
+  observeEvent(eventExpr = {
+    input$mu
+    input$std
+  }, {
+    updateSliderInput(inputId = "rangePriori", min = (input$mu - 2*input$std), max = (input$mu + 2*input$std))
+  })
+
 
   #### data ####
   # get input from ui

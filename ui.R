@@ -70,7 +70,7 @@ column(2,     checkboxInput("p_forest", "Forestplot", value = F)),
 
     #### Priors ####
     # Gleichverteiler Prior
-    # Minimum
+    # Minimum und Maximum
     sliderInput(inputId = "rangePriori",
                 "Range unter der Werte möglich sind",
                 min = -100,

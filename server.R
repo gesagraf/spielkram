@@ -8,6 +8,11 @@ server <- function(input, output, session) {
 
   set.seed(12345)
 
+  #slider updaten
+  observeEvent(input$number, {
+    updateSliderInput(inputId = "specific", max = input$number)
+  })
+
   #### data ####
   # get input from ui
   mu <- reactive(input$mu)                         # Population mean
@@ -20,6 +25,8 @@ server <- function(input, output, session) {
   mu_prior <-  reactive(input$mu_prior)            # mittelwert der priori
   tau_prior <- reactive(input$tau_prior)           # sd der priori
   lengthout <- 100                                # die Länge von mu_hat, NICHT REAKTIV!
+
+
 
   # Anzahl der Klassen nach Sturges' Regel (für Histogram der einzelnen Stichprobe)
   num_classes <- reactive(ceiling(log2(n()) + 1))

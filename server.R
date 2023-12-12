@@ -24,6 +24,7 @@ server <- function(input, output, session) {
   })
 
 
+
   #### data ####
   # get input from ui
   mu <- reactive(input$mu)                         # Population mean
@@ -31,8 +32,10 @@ server <- function(input, output, session) {
   n  <- reactive(input$n)                          # sample size
   number <- reactive(input$number)                 # number of samples
   specific <- reactive(input$specific)             # specific sample
+
   min_uni_priori <- reactive(input$rangePriori[1]) # minimum für gleichverteilte priori
   max_uni_priori <- reactive(input$rangePriori[2]) # max für gleichverteilte priori
+
   mu_prior <-  reactive(input$mu_prior)            # mittelwert der priori
   tau_prior <- reactive(input$tau_prior)           # sd der priori
   lengthout <- 100                                # die Länge von mu_hat, NICHT REAKTIV!

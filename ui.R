@@ -60,12 +60,14 @@ column(2,     checkboxInput("p_forest", "Forestplot", value = F)),
                 max = 1000,
                 value = 10),
 
-    # Specific Sample
+    # Specific Sample: Dynamic Max depending on "number" (see server.R)
     sliderInput(inputId = "specific",
-                "Spezifische Stichprobe",
-                min = 0,
-                max = 1000,
+                label = "Spezifische Stichprobe",
+                max = 10,
+                min = 1,
+                step = 1,
                 value = 3),
+
 
 
     #### Priors ####
@@ -76,6 +78,7 @@ column(2,     checkboxInput("p_forest", "Forestplot", value = F)),
                 min = -100,
                 max = 100,
                 value = c(-5,5)),
+
 
 
     # Normalverteilter Prior

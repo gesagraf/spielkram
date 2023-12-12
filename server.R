@@ -8,16 +8,22 @@ server <- function(input, output, session) {
 
   set.seed(12345)
 
-  ## UI: update "specific" slider, corresponding to input$number
 
-  observe(label = "update_specific_slider", {
-    updateSliderInput(inputId = "specific",
-                      max = input$number,
-                      value = ifelse(test = input$number < input$specific,
-                                     yes = input$number,
-                                     no = input$specific))
-                      # avoid having a value higher than the new max
+
+  #slider updaten
+  #länge des sliders an number anpassen
+  observeEvent(input$number, {
+    updateSliderInput(inputId = "specific", max = input$number)
   })
+  #range der priori auf mu hat begrenzen
+  observeEvent(eventExpr = {
+    input$mu
+    input$std
+  }, {
+    updateSliderInput(inputId = "rangePriori", min = (input$mu - 2*input$std), max = (input$mu + 2*input$std))
+  })
+
+
 
   #### data ####
   # get input from ui
@@ -26,11 +32,15 @@ server <- function(input, output, session) {
   n  <- reactive(input$n)                          # sample size
   number <- reactive(input$number)                 # number of samples
   specific <- reactive(input$specific)             # specific sample
-  min_uni_priori <- reactive(input$uni_prior_range[1]) # minimum für gleichverteilte priori
-  max_uni_priori <- reactive(input$uni_prior_range[2]) # max für gleichverteilte priori
+
+  min_uni_priori <- reactive(input$rangePriori[1]) # minimum für gleichverteilte priori
+  max_uni_priori <- reactive(input$rangePriori[2]) # max für gleichverteilte priori
+
   mu_prior <-  reactive(input$mu_prior)            # mittelwert der priori
   tau_prior <- reactive(input$tau_prior)           # sd der priori
   lengthout <- 100                                # die Länge von mu_hat, NICHT REAKTIV!
+
+
 
   # Anzahl der Klassen nach Sturges' Regel (für Histogram der einzelnen Stichprobe)
   num_classes <- reactive(ceiling(log2(n()) + 1))

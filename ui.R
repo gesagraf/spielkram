@@ -68,16 +68,17 @@ column(2,     checkboxInput("p_forest", "Forestplot", value = F)),
                 step = 1,
                 value = 3),
 
+
+
     #### Priors ####
     # Gleichverteiler Prior
-
-    sliderInput("uni_prior_range",
-                "Minimum und Maximum der Gleichverteilten Priori",
-                dragRange = TRUE,
+    # Minimum und Maximum
+    sliderInput(inputId = "rangePriori",
+                "Range unter der Werte möglich sind",
                 min = -100,
                 max = 100,
-                value = c(-10, 0),
-                step = 1),
+                value = c(-5,5)),
+
 
 
     # Normalverteilter Prior
